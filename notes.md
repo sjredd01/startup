@@ -18,4 +18,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## Week notes
 
-Week one: (weekOneNotes.md)
+[Week one notes](weekOneNotes.md)
