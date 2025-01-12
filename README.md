@@ -37,8 +37,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```mermaid
 sequenceDiagram
-    actor You
     actor Other players
+    actor You
     actor Website
     actor DB
     You->>Website: Register a user
@@ -47,7 +47,12 @@ sequenceDiagram
     Website->>DB: Personal high scores
     Website->>DB: All time high scores
     You->>Website: Play game
-    Other players->>Website: Live score updates
+    Website->>Other players: Live score updates
+    You->>Website: Finish Game
+    Website->>DB: Save Score
+    Website->>DB: Update personal and all time high score chart
+
+
 
 
 ```
