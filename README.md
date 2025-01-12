@@ -33,7 +33,7 @@ Have you ever been sitting in class board? Have you been in a meeting that easil
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Above are some basic images and layouts of the application. Beneth is a basic sequence diagram of how the player, website, db and other users will interact.
 
 ```mermaid
 sequenceDiagram
@@ -47,7 +47,7 @@ sequenceDiagram
     Website->>DB: Personal high scores
     Website->>DB: All time high scores
     You->>Website: Play game
-    Website->>Other players: Live score updates
+    Website-->>Other players: Live score updates
     You->>Website: Finish Game
     Website->>DB: Save Score
     Website->>DB: Update personal and all time high score chart
