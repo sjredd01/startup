@@ -38,13 +38,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```mermaid
 sequenceDiagram
     actor You
+    actor Other players
     actor Website
     actor DB
     You->>Website: Register a user
     Website->>DB: Saver login info
     You->>Website: Login with info
-    Website->>DB: Personal high scores
-    Website->>DB: All time high scores
+    Website<<-DB: Personal high scores
+    Website<<-DB: All time high scores
+    You->>Website: Play game
+    Other players<<-Website: Live score updates
+
 
 ```
 
