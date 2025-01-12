@@ -39,7 +39,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 sequenceDiagram
     actor You
     actor Website
-    You->>Website: Replace this with your design
+    actor DB
+    You->>Website: Register a user
+    Website->>DB: Saver login info
+    You->>Website: Login with info
+    Website->>DB: Personal high scores
+    Website->>DB: All time high scores
+
 ```
 
 ### Key features
