@@ -44,10 +44,10 @@ sequenceDiagram
     You->>Website: Register a user
     Website->>DB: Saver login info
     You->>Website: Login with info
-    Website<<-DB: Personal high scores
-    Website<<-DB: All time high scores
+    Website->>DB: Personal high scores
+    Website->>DB: All time high scores
     You->>Website: Play game
-    Other players<<-Website: Live score updates
+    Other players->>Website: Live score updates
 
 
 ```
