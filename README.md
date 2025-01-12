@@ -31,7 +31,7 @@ Have you ever been sitting in class board? Have you been in a meeting that easil
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](homePage.png)
 
 Above are some basic images and layouts of the application. Beneth is a basic sequence diagram of how the player, website, db and other users will interact.
 
