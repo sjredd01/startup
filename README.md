@@ -1,4 +1,4 @@
-# Defend the cities
+# Defend the Cities
 
 [My Notes](notes.md)
 
@@ -20,14 +20,14 @@ you control a movable cannon where you shot descending aliens that can shoot bac
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
+- [x] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever been sitting in class board? Have you been in a meeting that easily could have been an email? Have you ever just wanted a quick easy mindless game to waste time with? Defend the Cities is the application for you. Its a quick mindless fun game that can play for either five minutes or for hours. You can look productive while enjoying your time. You can play whenever where ever you want. You can have unlimited amounts of fun with Defend the Cities!
 
 ### Design
 
