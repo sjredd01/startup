@@ -19,11 +19,11 @@ you control a movable cannon where you shot descending aliens that can shoot bac
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
+- [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -32,8 +32,12 @@ Have you ever been sitting in class board? Have you been in a meeting that easil
 ### Design
 
 ![Design image](homePage.png)
+![Design image](loginRegisterPage.png)
+![Design image](personalScoresPage.png)
+![Design image](highScorePage.png)
+![Design image](gameplayPage.png)
 
-Above are some basic images and layouts of the application. Beneth is a basic sequence diagram of how the player, website, db and other users will interact.
+Above are some basic images and layouts of the application pages with notes. (It will look nicer then the above images those are just a ruff outline). Below is a basic sequence diagram of how the player, website, db and other users will interact.
 
 ```mermaid
 sequenceDiagram
