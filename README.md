@@ -22,7 +22,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -52,12 +52,12 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - I will be using HTML structure for the application. The application will have three pages. A login page, a high score page and a game play page.
+- **CSS** - This technology will be used to make sure the application can be played well on many different screen sizes. Alos will be used to animate the movemnt of the aliens and the user. Animate the shots and the cities being defended.
+- **React** - I will use react to handling the players key inputs and have it translate to animation. Also to build the ui for login in and registering a user and the state managment of the gameplay. Changeing how the ui looks with key presses and animations.
+- **Service** - The backend will have endpoints for login, saving highscores, retriving previous scores.
+- **DB/Login** - The DB will store the users and their personal high scores. All top 20 high scores of all time. The login information for the users. And all previous scores from a player. Register and login users.
+- **WebSocket** - Live score updates and user names will be broadcasted to all users who are playing a game.
 
 ## 🚀 AWS deliverable
 
