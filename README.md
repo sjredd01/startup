@@ -21,7 +21,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [ ] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] Description of key features
 - [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -44,9 +44,13 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- The ability to register and log in as a user over HTTPS
+- Able to display all time high scores
+- Able to display personal scores
+- All scores are saved
+- Ability to broadcast scores to all players currently playing
+- Ability to know when keys are pressed to move character on screen
+- Ability to know when a fire key is pressed
 
 ### Technologies
 
@@ -55,7 +59,7 @@ I am going to use the required technologies in the following ways.
 - **HTML** - I will be using HTML structure for the application. The application will have three pages. A login page, a high score page and a game play page.
 - **CSS** - This technology will be used to make sure the application can be played well on many different screen sizes. Alos will be used to animate the movemnt of the aliens and the user. Animate the shots and the cities being defended.
 - **React** - I will use react to handling the players key inputs and have it translate to animation. Also to build the ui for login in and registering a user and the state managment of the gameplay. Changeing how the ui looks with key presses and animations.
-- **Service** - The backend will have endpoints for login, saving highscores, retriving previous scores.
+- **Service** - The backend will have endpoints for login, saving highscores, retriving previous scores. And a public api EmojiHub to get an emoji of an explosion and have it pop up at times.
 - **DB/Login** - The DB will store the users and their personal high scores. All top 20 high scores of all time. The login information for the users. And all previous scores from a player. Register and login users.
 - **WebSocket** - Live score updates and user names will be broadcasted to all users who are playing a game.
 
