@@ -19,3 +19,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## Week notes
 
 [Week one notes](weekOneNotes.md)
+
+[Week two notes](weekTwoNotes.md)
