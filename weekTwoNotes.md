@@ -7,3 +7,7 @@ I learned about buying a dns and more AWS stuff. I think it is so cool that I ha
 ## Terminal
 
 I did a lot of stuff in the terminal and figuring out my computures built in protections. Honestly kinda annoying but thats Apple for you. But I was able to do everything.
+
+## HTTPS
+
+I learned that we can actually change our server and use caddy to make it more secure. It was fun to ssh into it and change it manually. I liked it.
