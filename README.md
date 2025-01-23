@@ -95,11 +95,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **HTML pages** - I have 6 HTML pages representing the home page, register page, login page, personal and all time high score page and gameplay page.
 - [x] **Proper HTML element usage** - I used body, nav, header and footer on the index page, and main in the login and registeration pages.
 - [x] **Links** - I have links from the index page to the login, register, personal and all time high score page and gameplay pages.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **Text** - I have the text for the tables and there repective column names. I have text explaining the technologies being implemented (placeholders). And text on the index page as an opening text. Text for the titles of the pages.
+- [x] **3rd party API placeholder** - On the gameplay page (defend the cities link) it has a picture of the emoji that will be called from the public api emoji hub. it will come up when you loose a life
+- [x] **Images** - I have an image of what the gameplay page will look like and an image of the explosion that will be called. both on the gameplay page.
 - [x] **Login placeholder** - I have a page specifically for login
-- [x] **DB data placeholder** - I mention where stuff will be entered in the database and when it will be pulled
+- [x] **DB data placeholder** - I mention where stuff will be entered in the database and when it will be pulled. Gameplay, high score pages, login and register pages
 - [x] **WebSocket placeholder** - Every 50 points the username and current points will be shared to all on the webpage over websocket, noted on each page.
 
 ## 🚀 CSS deliverable
