@@ -47,31 +47,3 @@ main {
   padding: 150px;
   text-align: center;
 }
-
-footer {
-  color: white;
-  text-align: center;
-  padding: 10px;
-  background: #333;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-@media (max-width: 600px) {
-  header {
-    text-align: center;
-  }
-
-  main {
-    text-align: center;
-  }
-
-  footer {
-    padding: 5px;
-  }
-
-  nav ul {
-    padding: 5px;
-  }
-}
