@@ -1,0 +1,86 @@
+html {
+  background-image: url(space.png);
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 100px;
+  text-align: center;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav a {
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+nav a:active,
+nav a:focus {
+  text-decoration: none;
+  color: white;
+  outline: none;
+}
+
+nav a:hover,
+nav a:focus {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: bold;
+}
+
+main {
+  padding: 250px;
+  text-align: center;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  background: #333;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+span a {
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+span a:active,
+span a:focus {
+  text-decoration: none;
+  color: white;
+  outline: none;
+}
+
+span a:hover,
+span a:focus {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: bold;
+}
