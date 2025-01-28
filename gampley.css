@@ -42,3 +42,29 @@ nav a:focus {
   padding: 10px;
   font-weight: bold;
 }
+
+body {
+  text-align: center;
+}
+
+main {
+  padding: 150px;
+  text-align: center;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+img[src="gameplayPage.png"] {
+  max-width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+  img {
+    max-width: 90%;
+    height: auto;
+  }
+}
