@@ -8,6 +8,10 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
+header {
+  background-image: url(space.png);
+}
+
 h1 {
   color: white;
   text-align: center;
