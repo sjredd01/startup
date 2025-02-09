@@ -1,4 +1,4 @@
-main {
+html {
   background-image: url(space.png);
   background-size: cover;
   background-position: center center;
@@ -9,11 +9,11 @@ main {
 }
 
 header {
-  background-image: url(space.png);
+  /* background-image: url(space.png); */
 }
 
-html {
-  background-image: url(space.png);
+main {
+  /* background-image: url(space.png); */
 }
 
 h1 {
@@ -34,8 +34,7 @@ nav a {
   text-align: center;
   text-decoration: none;
   color: white;
-  margin: 0 50px;
-  padding: 20px;
+  padding: 10px;
 }
 
 nav a:active,
@@ -49,6 +48,7 @@ nav a:hover,
 nav a:focus {
   color: white;
   text-decoration: none;
+  padding: 10px;
   font-weight: bold;
 }
 

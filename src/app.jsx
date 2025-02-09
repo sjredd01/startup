@@ -11,7 +11,7 @@ import { Gameplay } from "./gameplay/gameplay";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="body bg-dark text-light">
+      <div>
         <header>
           <h1>Defend the Cities</h1>
           <nav>
