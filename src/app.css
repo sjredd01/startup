@@ -19,11 +19,11 @@ main {
 }
 
 header {
-  background-image: url(space.png);
+  background-image: url("/public/space.png");
 }
 
 html {
-  background-image: url(space.png);
+  background-image: url("/public/space.png");
 }
 
 h1 {
