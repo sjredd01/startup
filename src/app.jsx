@@ -51,7 +51,7 @@ export default function App() {
           <Route path="personalHighScore" element={<PersonalHighScore />} />
           <Route path="allTimeHighScore" element={<AllTimeHighScore />} />
           <Route path="gameplay" element={<Gameplay />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
         <footer>
           <span> Creator Name:</span>
@@ -62,10 +62,10 @@ export default function App() {
   );
 }
 
-function NotFound() {
-  return (
-    <main className="container-fluid bg-secondary text-center">
-      404: Return to sender. Address unknown.
-    </main>
-  );
-}
+// function NotFound() {
+//   return (
+//     <main className="container-fluid bg-secondary text-center">
+//       404: Return to sender. Address unknown.
+//     </main>
+//   );
+// }
