@@ -11,7 +11,6 @@ export function Gameplay() {
       </p>
       <p>It will appear in the top right corner</p>
       <p>Your score and username will saved in the database</p>
-      <p>(The image has the websocket and the currect score reversed)</p>
 
       {/* <a href="gameplayPage.png">
         <img
