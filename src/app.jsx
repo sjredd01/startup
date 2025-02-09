@@ -7,6 +7,7 @@ import { Login } from "./login/login";
 import { PersonalHighScore } from "./personalHighScore/personalHighScore";
 import { AllTimeHighScore } from "./allTimeHighScore/allTimeHighScore";
 import { Gameplay } from "./gameplay/gameplay";
+import { Home } from "./home/home";
 
 export default function App() {
   return (
@@ -51,7 +52,8 @@ export default function App() {
           <Route path="personalHighScore" element={<PersonalHighScore />} />
           <Route path="allTimeHighScore" element={<AllTimeHighScore />} />
           <Route path="gameplay" element={<Gameplay />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home />} />
         </Routes>
         <footer>
           <span> Creator Name:</span>
@@ -62,10 +64,10 @@ export default function App() {
   );
 }
 
-// function NotFound() {
-//   return (
-//     <main className="container-fluid bg-secondary text-center">
-//       404: Return to sender. Address unknown.
-//     </main>
-//   );
-// }
+function NotFound() {
+  return (
+    <main className="container-fluid bg-secondary text-center">
+      404: Return to sender. Address unknown.
+    </main>
+  );
+}
