@@ -12,26 +12,14 @@ export function Gameplay() {
       <p>It will appear in the top right corner</p>
       <p>Your score and username will saved in the database</p>
 
-      {/* <a href="gameplayPage.png">
-        <img
-          src="gameplayPage.png"
-          alt="gameplayPage"
-          style="width: 750px; height: 750px"
-        />
-      </a>
+      <img src="gameplayPage.png"></img>
 
       <p>
         When you get hit it will call the public API and show this explosion
         emoji
       </p>
 
-      <a href="explosion.jpg">
-        <img
-          src="explosion.jpg"
-          alt="explosion"
-          style="width: 500px; height: 500px"
-        />
-      </a> */}
+      <img src="explosion.jpg"></img>
     </main>
   );
 }

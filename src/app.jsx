@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
@@ -10,6 +10,23 @@ import { Gameplay } from "./gameplay/gameplay";
 import { Home } from "./home/home";
 
 export default function App() {
+  const [randomName, setRandomName] = useState("");
+  const [randomScore, setRandomScore] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRandomName(getRandomName());
+      setRandomScore(getRandomScore());
+      setVisible(true);
+
+      setTimeout(() => {
+        setVisible(false);
+      }, 2000); // 2 seconds
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <BrowserRouter>
       <div>
@@ -45,6 +62,12 @@ export default function App() {
             </ul>
           </nav>
         </header>
+        {visible && (
+          <div className="random-score">
+            <p>Player: {randomName}</p>
+            <p>New High Score: {randomScore}</p>
+          </div>
+        )}
 
         <Routes>
           <Route path="register" element={<Register />} />
@@ -70,4 +93,13 @@ function NotFound() {
       404: Return to sender. Address unknown.
     </main>
   );
+}
+
+function getRandomName() {
+  const names = ["Alice", "Bob", "Charlie", "David", "Eve"];
+  return names[Math.floor(Math.random() * names.length)];
+}
+
+function getRandomScore() {
+  return Math.floor(Math.random() * 1000);
 }

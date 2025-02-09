@@ -117,9 +117,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - It is bundled using vite
+- [x] **Components** - I mocked login and register components, when you hit login or register it will take you to the gamplay page.The data base is mocked in the all time and personal high score pages, the fake scores will be replaced by ones from the database. The application logic is still mocked by the gameplay image. I mocked the websocket component by having a random name with a random score appear in the top left every 5 seconds, disapearing after 2 seconds I used a use effect function.
+- [x] **Router** - I have routing from the home page to the login, register, personal and all time high score and gameplay pages. Their is a route that sends a 404 if you try to go to not a real page. Also the routes go from login, register, personal and all time high score and gameplay pages to all the other pages except home.
 
 ## 🚀 React part 2: Reactivity
 

@@ -1,10 +1,18 @@
 import React from "react";
 import "./pages.css";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate("/gameplay");
+  };
+
   return (
     <main>
-      <form action="/login" method="post">
+      <form onSubmit={handleSubmit}>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />
         <br />

@@ -1,10 +1,17 @@
 import React from "react";
 import "./register.css";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate("/gameplay");
+  };
   return (
     <main>
-      <form action="register.php" method="post">
+      <form onSubmit={handleSubmit}>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />
         <br />
