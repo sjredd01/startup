@@ -1,12 +1,14 @@
 import React from "react";
 import "./gampley.css";
+import { DefendTheCities } from "./game";
 
 export function Gameplay() {
   return (
     <main>
-      <p>This is where the game will be played</p>
+      <DefendTheCities />
+      {/* <p>This is where the game will be played</p>
       <p>
-        When you hit incrament of 50 points it will communicate over websocket
+        When  you hit incrament of 50 points it will communicate over websocket
         to everyone on the server/webpage that you have hit that point
       </p>
       <p>It will appear in the top right corner</p>
@@ -19,7 +21,7 @@ export function Gameplay() {
         emoji
       </p>
 
-      <img src="explosion.jpg"></img>
+      <img src="explosion.jpg"></img> */}
     </main>
   );
 }
