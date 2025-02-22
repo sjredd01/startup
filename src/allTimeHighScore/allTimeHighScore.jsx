@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./form.css";
 
 export function AllTimeHighScore() {
+  const [scores, setScores] = useState([]);
+
+  useEffect(() => {
+    const savedPlayerScores = localStorage.getItem("player-scores");
+    if (savedPlayerScores) {
+      try {
+        const parsedScores = JSON.parse(savedPlayerScores);
+        console.log("Parsed Scores:", parsedScores); // Debugging log
+
+        // Filter out invalid entries
+        const validScores = parsedScores.filter(
+          (score) =>
+            typeof score.user === "string" && typeof score.score === "number"
+        );
+
+        const topScores = validScores
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10); // Sort and slice scores from index 14 to 24
+        setScores(topScores);
+      } catch (error) {
+        console.error("Error parsing JSON from local storage:", error);
+      }
+    }
+  }, []);
+
   return (
     <main>
       <table>
@@ -13,21 +38,13 @@ export function AllTimeHighScore() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Player1</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Player2</td>
-            <td>900</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Player3</td>
-            <td>800</td>
-          </tr>
+          {scores.map((entry, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{entry.user}</td>
+              <td>{entry.score}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </main>

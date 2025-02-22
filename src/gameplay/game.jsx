@@ -9,6 +9,7 @@ export function DefendTheCities() {
   const [direction, setDirection] = useState("right");
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
+  const [playerName, setPlayerName] = useState("Player1"); // Example player name, replace with actual user input
   const gameAreaRef = useRef(null);
 
   useEffect(() => {
@@ -29,6 +30,32 @@ export function DefendTheCities() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [playerPosition, enemies]);
+
+  useEffect(() => {
+    if (gameOver) {
+      const savedScores = JSON.parse(localStorage.getItem("scores")) || [];
+      savedScores.push(score);
+      localStorage.setItem("scores", JSON.stringify(savedScores));
+    }
+  }, [gameOver, score]);
+
+  useEffect(() => {
+    if (gameOver) {
+      const savedPlayerScores =
+        JSON.parse(localStorage.getItem("scores")) || [];
+      savedPlayerScores.push({ user: playerName, score });
+      localStorage.setItem("player-scores", JSON.stringify(savedPlayerScores));
+    }
+  }, [gameOver, score, playerName]);
+
+  const startNewGame = () => {
+    setScore(0);
+    setGameOver(false);
+    setPlayerPosition(50);
+    setBullets([]);
+    setEnemyBullets([]);
+    setEnemies(generateEnemies());
+  };
 
   const generateEnemyBullets = (enemies) => {
     const randomEnemyIndex = Math.floor(Math.random() * enemies.length);
@@ -146,6 +173,7 @@ export function DefendTheCities() {
         <div className="game-over">
           Game Over
           <div className="final-score">Final Score: {score}</div>
+          <button onClick={startNewGame}>Start New Game</button>
         </div>
       ) : (
         <>
