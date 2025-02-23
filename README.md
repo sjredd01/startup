@@ -125,7 +125,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - Everything is mocked out or implemented. The game can be played, scores are saved and pulled in the tables. register and login is mocked out. In the console log it prints "hit" where the api will be called.
 - [x] **Hooks** - I used useState and useEffect in the game.jsx
 
 ## 🚀 Service deliverable

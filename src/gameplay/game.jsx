@@ -9,8 +9,15 @@ export function DefendTheCities() {
   const [direction, setDirection] = useState("right");
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [playerName, setPlayerName] = useState("Player1"); // Example player name, replace with actual user input
+  const [playerName, setPlayerName] = useState("Player1");
   const gameAreaRef = useRef(null);
+
+  useEffect(() => {
+    const storedPlayerName = localStorage.getItem("username");
+    if (storedPlayerName) {
+      setPlayerName(storedPlayerName);
+    }
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -120,6 +127,7 @@ export function DefendTheCities() {
             bullet.left <= enemy.left + 5
         );
         if (hit) {
+          console.log("hit");
           setScore((prevScore) => prevScore + 50);
         }
         return !hit;
