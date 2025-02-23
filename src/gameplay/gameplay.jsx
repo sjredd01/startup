@@ -6,6 +6,7 @@ export function Gameplay() {
   return (
     <main>
       <DefendTheCities />
+
       {/* <p>This is where the game will be played</p>
       <p>
         When  you hit incrament of 50 points it will communicate over websocket
