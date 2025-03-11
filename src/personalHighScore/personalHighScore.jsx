@@ -5,7 +5,17 @@ export function PersonalHighScore() {
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    const savedScores = localStorage.getItem("scores");
+    //const savedScores = localStorage.getItem("scores");
+
+    const savedScores = fetch("/api/scores")
+      .then((response) => response.json())
+      .then((data) => {
+        setScores(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching personal scores:", error);
+      });
+
     if (savedScores) {
       try {
         const parsedScores = JSON.parse(savedScores);

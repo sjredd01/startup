@@ -5,7 +5,16 @@ export function AllTimeHighScore() {
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    const savedPlayerScores = localStorage.getItem("player-scores");
+    const savedPlayerScores = fetch("/api/alltimescores")
+      .then((response) => response.json())
+      .then((data) => {
+        setScores(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching all time scores:", error);
+      });
+
+    //const savedPlayerScores = localStorage.getItem("player-scores");
     if (savedPlayerScores) {
       try {
         const parsedScores = JSON.parse(savedPlayerScores);

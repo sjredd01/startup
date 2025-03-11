@@ -8,22 +8,20 @@ export function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log("Form submitted");
 
-    // Basic validation
     if (password.length < 6) {
       console.log("Password validation failed");
       return;
     }
 
-    // Log success
     console.log("Navigating to gameplay");
+
+    // Temporary check: Remove localStorage for debugging
     localStorage.setItem("username", username);
     localStorage.setItem("password", password);
 
-    // Simulate navigation
-    navigate("/gameplay"); // This is where we navigate
+    navigate("/gameplay"); // Ensure this is correct and the route exists
   };
 
   return (
@@ -37,7 +35,6 @@ export function Register() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          autoComplete="username"
         />
         <br />
         <label htmlFor="password">Password:</label>
@@ -48,7 +45,6 @@ export function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          autoComplete="current-password"
         />
         <br />
         <button type="submit">Register</button>
