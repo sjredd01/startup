@@ -3,37 +3,31 @@ import "./form.css";
 
 export function PersonalHighScore() {
   const [scores, setScores] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
-    //const savedScores = localStorage.getItem("scores");
+    const email = localStorage.getItem("username");
+    setUserEmail(email);
 
-    const savedScores = fetch("/api/scores")
+    fetch("/api/alltimescores")
       .then((response) => response.json())
       .then((data) => {
-        setScores(data);
+        // Filter scores to only include those from the logged-in user
+        const userScores = data.filter(
+          (score) => score.user === email && typeof score.score === "number"
+        );
+
+        // Sort scores in descending order and take the top 10
+        const topScores = userScores
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10);
+        setScores(topScores);
       })
       .catch((error) => {
         console.error("Error fetching personal scores:", error);
       });
-
-    if (savedScores) {
-      try {
-        const parsedScores = JSON.parse(savedScores);
-        console.log("Parsed Scores:", parsedScores); // Debugging log
-
-        // Validate and filter the scores
-        const validScores = parsedScores.filter(
-          (score) => typeof score === "number"
-        );
-
-        // Sort scores in descending order and take the top 10
-        const topScores = validScores.sort((a, b) => b - a).slice(0, 10);
-        setScores(topScores);
-      } catch (error) {
-        console.error("Error parsing JSON from local storage:", error);
-      }
-    }
   }, []);
+
   return (
     <main>
       <table>
@@ -44,10 +38,10 @@ export function PersonalHighScore() {
           </tr>
         </thead>
         <tbody>
-          {scores.map((score, index) => (
+          {scores.map((entry, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{score}</td>
+              <td>{entry.score}</td>
             </tr>
           ))}
         </tbody>

@@ -5,35 +5,24 @@ export function AllTimeHighScore() {
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    const savedPlayerScores = fetch("/api/alltimescores")
+    fetch("/api/alltimescores")
       .then((response) => response.json())
       .then((data) => {
-        setScores(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching all time scores:", error);
-      });
-
-    //const savedPlayerScores = localStorage.getItem("player-scores");
-    if (savedPlayerScores) {
-      try {
-        const parsedScores = JSON.parse(savedPlayerScores);
-        console.log("Parsed Scores:", parsedScores); // Debugging log
-
         // Filter out invalid entries
-        const validScores = parsedScores.filter(
+        const validScores = data.filter(
           (score) =>
             typeof score.user === "string" && typeof score.score === "number"
         );
 
+        // Sort and slice scores to get the top 10
         const topScores = validScores
           .sort((a, b) => b.score - a.score)
-          .slice(0, 10); // Sort and slice scores from index 14 to 24
+          .slice(0, 10);
         setScores(topScores);
-      } catch (error) {
-        console.error("Error parsing JSON from local storage:", error);
-      }
-    }
+      })
+      .catch((error) => {
+        console.error("Error fetching all time scores:", error);
+      });
   }, []);
 
   return (

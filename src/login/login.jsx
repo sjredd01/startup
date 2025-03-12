@@ -8,20 +8,30 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Retrieve stored username and password from local storage
-    const storedUsername = localStorage.getItem("username");
-    const storedPassword = localStorage.getItem("password");
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: username, password: password }),
+      });
 
-    // Check if the input values match the stored values
-    if (username === storedUsername && password === storedPassword) {
-      console.log("Login successful");
-      navigate("/gameplay");
-    } else {
-      console.log("Login failed");
-      setError("Invalid username or password");
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("username", data.email);
+        console.log("Login successful");
+        navigate("/gameplay");
+      } else {
+        console.log("Login failed");
+        setError("Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError("An error occurred. Please try again.");
     }
   };
 
