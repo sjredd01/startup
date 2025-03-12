@@ -132,11 +132,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Done
+- [x] **Static middleware for frontend** - Did it
 - [x] **Calls to third party endpoints** - Everytime you game over it calls the quote API.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Backend service endpoints** - I have backend service endpoints for login and register and saving scores
+- [x] **Frontend calls service endpoints** - I use fetch in the game, and in the personal and all time hish score tables.
 
 ## 🚀 DB/Login deliverable
 
