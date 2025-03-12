@@ -61,21 +61,9 @@ apiRouter.delete("/auth/logout", async (req, res) => {
   res.status(204).end();
 });
 
-// CheckAuth status
-apiRouter.get("/auth/status", async (req, res) => {
-  const token = req.cookies[authCookieName];
-  const user = await findUser("token", token);
-  if (user) {
-    res.send({ email: user.email });
-  } else {
-    res.status(401).send({ msg: "Unauthorized" });
-  }
-});
-
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  const user = await findUser("token", token);
+  const user = await findUser("token", req.cookies[authCookieName]);
   if (user) {
     next();
   } else {
@@ -94,49 +82,37 @@ apiRouter.get("/alltimescores", verifyAuth, (_req, res) => {
 });
 
 // Submit UserScore
-apiRouter.post("/score", (req, res) => {
-  // Removed verifyAuth
-  try {
-    UserScores = updateScores(req.body);
-    res.send(UserScores);
-  } catch (error) {
-    console.error("Error saving score:", error);
-    res.status(500).send({ msg: "Internal Server Error" });
-  }
+apiRouter.post("/score", verifyAuth, (req, res) => {
+  UserScores = updateScores(req.body);
+  res.send(UserScores);
 });
 
 // Submit AllTimeScore
-apiRouter.post("/alltimescore", (req, res) => {
-  // Removed verifyAuth
-  try {
-    AllTimeScores = updateAllTimeScores(req.body);
-    res.send(AllTimeScores);
-  } catch (error) {
-    console.error("Error saving all-time score:", error);
-    res.status(500).send({ msg: "Internal Server Error" });
-  }
+apiRouter.post("/alltimescore", verifyAuth, (req, res) => {
+  AllTimeScores = updateAllTimeScores(req.body);
+  res.send(AllTimeScores);
 });
 
 // updateScores considers a new score for inclusion in the high scores.
 function updateScores(newScore) {
   let found = false;
-  for (const [i, prevScore] of UserScores.entries()) {
+  for (const [i, prevScore] of scores.entries()) {
     if (newScore.score > prevScore.score) {
-      UserScores.splice(i, 0, newScore);
+      scores.splice(i, 0, newScore);
       found = true;
       break;
     }
   }
 
   if (!found) {
-    UserScores.push(newScore);
+    scores.push(newScore);
   }
 
-  if (UserScores.length > 10) {
-    UserScores.length = 10;
+  if (scores.length > 10) {
+    scores.length = 10;
   }
 
-  return UserScores;
+  return scores;
 }
 
 // updateAllTimeScores considers a new score for inclusion in the all time high scores.
@@ -183,7 +159,7 @@ async function findUser(field, value) {
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
-    secure: true, // Ensure this is set to true if using HTTPS
+    secure: true,
     httpOnly: true,
     sameSite: "strict",
   });
