@@ -49,6 +49,24 @@ export function DefendTheCities() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(false);
+        localStorage.removeItem("username");
+        setPlayerName("Player1");
+      } else {
+        console.error("Failed to log out");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "a" || e.key === "ArrowLeft") {
@@ -258,6 +276,7 @@ export function DefendTheCities() {
                 "{quote}" - {quoteAuthor}
               </div>
               <button onClick={startNewGame}>Start New Game</button>
+              <button onClick={handleLogout}>Logout</button>
             </div>
           ) : (
             <>
