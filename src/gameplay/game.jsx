@@ -77,7 +77,7 @@ export function DefendTheCities() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ score }),
+            body: JSON.stringify({ user: playerName, score }),
           });
 
           if (!response.ok) {

@@ -4,12 +4,9 @@ const express = require("express");
 const uuid = require("uuid");
 const cors = require("cors");
 const app = express();
+const DB = require("./database.js");
 
 const authCookieName = "token";
-
-let users = [];
-let UserScores = [];
-let AllTimeScores = [];
 
 app.use(express.json());
 app.use(cookieParser());
@@ -43,6 +40,7 @@ apiRouter.post("/auth/login", async (req, res) => {
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       user.token = uuid.v4();
+      await DB.updateUser(user);
       setAuthCookie(res, user.token);
       res.send({ email: user.email });
       return;
@@ -56,6 +54,7 @@ apiRouter.delete("/auth/logout", async (req, res) => {
   const user = await findUser("token", req.cookies[authCookieName]);
   if (user) {
     delete user.token;
+    await DB.updateUser(user);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -72,69 +71,63 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetUserScores
-apiRouter.get("/scores", verifyAuth, (_req, res) => {
+apiRouter.get("/scores", verifyAuth, async (_req, res) => {
+  const UserScores = await DB.getPersonalScores(_req.body.email);
   res.send(UserScores);
 });
 
 // Get all time scores
-apiRouter.get("/alltimescores", verifyAuth, (_req, res) => {
+apiRouter.get("/alltimescores", verifyAuth, async (_req, res) => {
+  const AllTimeScores = await DB.getAllTimeScores();
   res.send(AllTimeScores);
 });
 
 // Submit UserScore
-apiRouter.post("/score", verifyAuth, (req, res) => {
-  UserScores = updateScores(req.body);
-  res.send(UserScores);
+apiRouter.post("/score", verifyAuth, async (req, res) => {
+  try {
+    console.log("Received score submission:", req.body);
+    const updatedScores = await updateScores(req.body);
+    console.log("Updated UserScores:", updatedScores);
+    res.send(updatedScores);
+  } catch (error) {
+    console.error("Error saving score:", error);
+    res.status(500).send({ msg: "Internal Server Error" });
+  }
 });
 
 // Submit AllTimeScore
-apiRouter.post("/alltimescore", verifyAuth, (req, res) => {
-  AllTimeScores = updateAllTimeScores(req.body);
-  res.send(AllTimeScores);
+apiRouter.post("/alltimescore", verifyAuth, async (req, res) => {
+  try {
+    console.log("Received all-time score submission:", req.body);
+    const updatedAllTimeScores = await updateAllTimeScores(req.body);
+    console.log("Updated AllTimeScores:", updatedAllTimeScores);
+    res.send(updatedAllTimeScores);
+  } catch (error) {
+    console.error("Error saving all-time score:", error);
+    res.status(500).send({ msg: "Internal Server Error" });
+  }
 });
 
 // updateScores considers a new score for inclusion in the high scores.
-function updateScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
+async function updateScores(newScore) {
+  try {
+    await DB.addPersonalScore(newScore);
+    return await DB.getPersonalScores(newScore.user.email);
+  } catch (error) {
+    console.error("Error in updateScores:", error);
+    throw error;
   }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
 }
 
 // updateAllTimeScores considers a new score for inclusion in the all time high scores.
-function updateAllTimeScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of AllTimeScores.entries()) {
-    if (newScore.score > prevScore.score) {
-      AllTimeScores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
+async function updateAllTimeScores(newScore) {
+  try {
+    await DB.addAllTimeScore(newScore);
+    return await DB.getAllTimeScores();
+  } catch (error) {
+    console.error("Error in updateAllTimeScores:", error);
+    throw error;
   }
-
-  if (!found) {
-    AllTimeScores.push(newScore);
-  }
-
-  if (AllTimeScores.length > 10) {
-    AllTimeScores.length = 10;
-  }
-
-  return AllTimeScores;
 }
 
 async function createUser(email, password) {
@@ -145,15 +138,17 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  users.push(user);
-
+  await DB.addUser(user);
   return user;
 }
 
 async function findUser(field, value) {
   if (!value) return null;
 
-  return users.find((u) => u[field] === value);
+  if (field === "token") {
+    return DB.getUserByToken(value);
+  }
+  return DB.getUser(value);
 }
 
 // setAuthCookie in the HTTP response
