@@ -9,10 +9,16 @@ const DB = require("./database.js");
 
 const authCookieName = "token";
 
+const corsOrigin =
+  process.env.NODE_ENV === "production"
+    ? "https://startup.sjredd01.click" // Replace with your production frontend URL
+    : "http://localhost:5173"; // Development frontend URL
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+app.use(cors({ origin: corsOrigin, credentials: true }));
+
+const port = process.env.PORT || 4000; // Use environment variable for production
 app.use(express.static("public"));
 
 var apiRouter = express.Router();

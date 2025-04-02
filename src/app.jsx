@@ -15,7 +15,12 @@ export default function App() {
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:4000"); // Updated to match backend WebSocket URL
+    const backendUrl =
+      process.env.NODE_ENV === "production"
+        ? "wss://startup.sjredd01.click" // Replace with your production WebSocket URL
+        : "ws://localhost:4000"; // Development WebSocket URL
+
+    const socket = new WebSocket(backendUrl);
     setWs(socket);
 
     socket.onmessage = async (event) => {
