@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const express = require("express");
 const uuid = require("uuid");
 const cors = require("cors");
+const WebSocket = require("ws");
 const app = express();
 const DB = require("./database.js");
 
@@ -10,7 +11,7 @@ const authCookieName = "token";
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true })); // Update this line
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static("public"));
 
@@ -160,9 +161,47 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+// Start Express server
+const server = app.listen(port, () => {
+  console.log(`Express server listening on port ${port}`);
 });
+
+// WebSocket server
+const wss = new WebSocket.Server({ server }); // Attach WebSocket to the same server
+
+const clients = new Set();
+
+wss.on("connection", (ws) => {
+  console.log("New WebSocket client connected");
+  clients.add(ws);
+
+  ws.on("message", (message) => {
+    // Convert the Buffer to a string and parse it as JSON
+    const data = JSON.parse(message.toString());
+    console.log("Received WebSocket message:", data);
+
+    // Broadcast the message as a string to all connected clients
+    const messageString = JSON.stringify({
+      name: data.name,
+      score: data.score,
+    });
+
+    console.log("Broadcasting message:", messageString); // Log the message being sent
+
+    for (const client of clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(messageString);
+      }
+    }
+  });
+
+  ws.on("close", () => {
+    console.log("WebSocket client disconnected");
+    clients.delete(ws);
+  });
+});
+
+console.log(`WebSocket server is running on ws://localhost:${port}`);
 
 // Default error handler
 app.use(function (err, req, res, next) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./game.css";
 
-export function DefendTheCities() {
+export function DefendTheCities({ onGameEnd, onScoreUpdate }) {
   const [playerPosition, setPlayerPosition] = useState(50);
   const [bullets, setBullets] = useState([]);
   const [enemyBullets, setEnemyBullets] = useState([]);
@@ -95,7 +95,7 @@ export function DefendTheCities() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ user: playerName, score }),
+            body: JSON.stringify({ user: playerName, score }), // Use the actual player's name
           });
 
           if (!response.ok) {
@@ -113,7 +113,7 @@ export function DefendTheCities() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ user: playerName, score }),
+            body: JSON.stringify({ user: playerName, score }), // Use the actual player's name
           });
 
           if (!response.ok) {
@@ -137,8 +137,18 @@ export function DefendTheCities() {
         .catch((error) => {
           console.error("Error fetching quote:", error);
         });
+
+      onGameEnd();
     }
-  }, [gameOver, score, playerName]);
+  }, [gameOver, score, playerName, onGameEnd]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      onScoreUpdate(score);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [score, onScoreUpdate]);
 
   const startNewGame = () => {
     setScore(0);

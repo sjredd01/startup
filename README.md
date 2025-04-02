@@ -152,8 +152,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - Done!
+- [x] **Frontend makes WebSocket connection** - Done!
+- [x] **Data sent over WebSocket connection** - Done!
+- [x] **WebSocket data displayed** - Done, when a user finishs a game the socre and user name is broadcatsed to everyone!
+- [x] **Application is fully functional** - The application works! Thank you for a fun semester!

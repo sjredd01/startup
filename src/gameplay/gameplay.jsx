@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./gampley.css";
 import { DefendTheCities } from "./game";
 
-export function Gameplay() {
+export function Gameplay({ sendScore }) {
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+
+  // Retrieve the player's name from localStorage or use a default value
+  const playerName = localStorage.getItem("username") || "Anonymous";
+
+  const handleGameEnd = () => {
+    setGameOver(true);
+    sendScore(playerName, score); // Use the actual player's name
+  };
+
+  const handleScoreUpdate = () => {
+    if (!gameOver) {
+      setScore((prevScore) => prevScore + 10);
+    }
+  };
+
   return (
     <main>
-      <DefendTheCities />
-
-      {/* <p>This is where the game will be played</p>
-      <p>
-        When  you hit incrament of 50 points it will communicate over websocket
-        to everyone on the server/webpage that you have hit that point
-      </p>
-      <p>It will appear in the top right corner</p>
-      <p>Your score and username will saved in the database</p>
-
-      <img src="gameplayPage.png"></img>
-
-      <p>
-        When you get hit it will call the public API and show this explosion
-        emoji
-      </p>
-
-      <img src="explosion.jpg"></img> */}
+      <DefendTheCities
+        onGameEnd={handleGameEnd}
+        onScoreUpdate={handleScoreUpdate}
+      />
+      <div>
+        <p>Score: {score}</p>
+        {gameOver && <p>Game Over! Your score has been sent.</p>}
+      </div>
     </main>
   );
 }

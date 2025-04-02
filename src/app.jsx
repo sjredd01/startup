@@ -10,23 +10,47 @@ import { Gameplay } from "./gameplay/gameplay";
 import { Home } from "./home/home";
 
 export default function App() {
-  const [randomName, setRandomName] = useState("");
-  const [randomScore, setRandomScore] = useState(0);
+  const [players, setPlayers] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [ws, setWs] = useState(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRandomName(getRandomName());
-      setRandomScore(getRandomScore());
-      setVisible(true);
+    const socket = new WebSocket("ws://localhost:4000"); // Updated to match backend WebSocket URL
+    setWs(socket);
 
-      setTimeout(() => {
-        setVisible(false);
-      }, 2000); // 2 seconds
-    }, 5000); // 5 seconds
+    socket.onmessage = async (event) => {
+      // Check if the message is a Blob
+      if (event.data instanceof Blob) {
+        const text = await event.data.text(); // Convert Blob to text
+        const data = JSON.parse(text); // Parse the JSON string
+        setPlayers((prevPlayers) => [...prevPlayers, data]);
+        setVisible(true);
 
-    return () => clearInterval(interval);
+        setTimeout(() => {
+          setVisible(false);
+        }, 2000); // 2 seconds
+      } else {
+        // Handle non-Blob messages (if any)
+        const data = JSON.parse(event.data);
+        setPlayers((prevPlayers) => [...prevPlayers, data]);
+        setVisible(true);
+
+        setTimeout(() => {
+          setVisible(false);
+        }, 2000); // 2 seconds
+      }
+    };
+
+    return () => socket.close();
   }, []);
+
+  const sendScore = (name, score) => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      // Send the message as a string
+      ws.send(JSON.stringify({ name, score }));
+    }
+  };
+
   return (
     <BrowserRouter>
       <div>
@@ -62,10 +86,14 @@ export default function App() {
             </ul>
           </nav>
         </header>
-        {visible && (
+        {visible && players.length > 0 && (
           <div className="random-score">
-            <p>Player: {randomName}</p>
-            <p>New High Score: {randomScore}</p>
+            {players.map((player, index) => (
+              <div key={index}>
+                <p>Player: {player.name}</p>
+                <p>New High Score: {player.score}</p>
+              </div>
+            ))}
           </div>
         )}
 
@@ -74,7 +102,7 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="personalHighScore" element={<PersonalHighScore />} />
           <Route path="allTimeHighScore" element={<AllTimeHighScore />} />
-          <Route path="gameplay" element={<Gameplay />} />
+          <Route path="gameplay" element={<Gameplay sendScore={sendScore} />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
         </Routes>
@@ -93,13 +121,4 @@ function NotFound() {
       404: Return to sender. Address unknown.
     </main>
   );
-}
-
-function getRandomName() {
-  const names = ["Alice", "Bob", "Charlie", "David", "Eve"];
-  return names[Math.floor(Math.random() * names.length)];
-}
-
-function getRandomScore() {
-  return Math.floor(Math.random() * 1000);
 }
